@@ -1,4 +1,4 @@
 load('Currency.js');
-load('AutomatedTeller.js');
+load('AutomatedCashier.js');
 
 print("currency NICKEL: " + CURRENCY.NICKEL);

@@ -1,10 +1,20 @@
-var TELLER = function(CURRENCY){
+var ACM = function(CURRENCY){
 
-    var teller = {};
+    var MakeAutomatedCashier = function(){
 
-    
+        var cashier = {};
 
 
-    return teller;
+
+        return cashier;
+    };
+
+
+
+
+    var acm = {};
+
+
+    return acm;
 
 }(CURRENCY);

@@ -1,5 +1,3 @@
-load('Tester.js');
-
 var TEST_LOADER = function(TESTER){
 
     var tests = {}
@@ -25,9 +23,6 @@ var TEST_LOADER = function(TESTER){
     return loader;
 
 }(TESTER);
-
-TEST_LOADER.loadTests().runTests();
-
 
 
 

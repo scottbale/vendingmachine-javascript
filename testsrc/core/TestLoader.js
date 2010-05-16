@@ -1,13 +1,10 @@
+CORE.require('core/Tester');
+
 var TEST_LOADER = function(TESTER){
 
     var tests = {}
 
     var loader = {
-        loadTests : function(){
-            // TODO use params
-            load('TestAutomatedCashier.js');
-            return this;
-        },
         runTests : function(){
             TESTER.TestRunner(tests).test();
             return this;

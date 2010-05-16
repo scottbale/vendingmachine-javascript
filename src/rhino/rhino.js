@@ -8,7 +8,11 @@ load('src/core/core.js');
 //    }
 
     CORE.require = function(toImport){
-        load('src/'+toImport+'.js');
+        try {
+            load('src/'+toImport+'.js');
+        } catch (e){
+            load('testsrc/'+toImport+'.js');
+        }
     }
     CORE.out = function(output){
         print(output);

@@ -1,5 +1,5 @@
-load('../src/Currency.js');
-load('../src/AutomatedCashier.js');
+CORE.require('vendingmachine/Currency');
+CORE.require('vendingmachine/AutomatedCashier');
 
 var TEST_AUTOMATED_CASHIER = function(){
 

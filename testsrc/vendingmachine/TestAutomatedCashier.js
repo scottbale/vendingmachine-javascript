@@ -1,10 +1,10 @@
 CORE.require('vendingmachine/Currency');
 CORE.require('vendingmachine/AutomatedCashier');
 
-var TEST_AUTOMATED_CASHIER = function(){
+(function(testLoader){
 
-    var module = {
-        tests : {
+    testLoader.addTests({
+        TestAutomatedCashier : {
             testNickel : function(){
               TESTER.assertEquals(5, CURRENCY.NICKEL);
             },
@@ -12,13 +12,10 @@ var TEST_AUTOMATED_CASHIER = function(){
               TESTER.assertEquals(4, CURRENCY.NICKEL);
             }
         }
-    };
-    
-    TEST_LOADER.addTests(module.tests);
+    });
 
-    return module;
 
-}(TEST_LOADER);
+}(TEST_LOADER));
 
 
 

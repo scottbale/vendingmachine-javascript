@@ -1,78 +1,90 @@
-var TESTER = {
+var TESTER = function(CORE){
 
-    TestRunner : function(test){
+    var tester = {
 
-        var testFunctions = [];
-        var testResults = {
-            ran : 0,
-            success : 0,
-            failure : 0,
-            error : 0,
-            failedTests : [],
-            failedMsgs : []
-        }
+        TestRunner : function(test){
 
-        for (prop in test){
-            if (prop.indexOf("test")>-1){
-                testFunctions.push(test[prop]);
+            var testFunctions = [];
+            var testResults = {
+                ran : 0,
+                success : 0,
+                failure : 0,
+                error : 0,
+                failedTests : [],
+                failedMsgs : []
             }
-        }
 
-        var testRunner = {
-            test : function(){
-                for(i=0;i < testFunctions.length; i+=1){
-                    attemptTest(testFunctions[i]);
+
+            var loadFunctions = function(test){
+                for (prop in test){
+                    if (typeof test[prop] == 'function'){
+                        if (prop.indexOf("test")>-1){
+                            testFunctions.push(test[prop]);
+                        }
+                    } else if (typeof test[prop] == 'object'){
+                        loadFunctions(test[prop]);
+                    }
                 }
-                printResults();
-            }
-        };
+            };
+
+            loadFunctions(test);
 
 
-        var attemptTest = function(testFunction){
-            testResults.ran += 1;
-            try {
-                testFunction();
-                testResults.success += 1;
-            } catch (e) {
-                if (e.name.indexOf("assert") > -1){
-                    testResults.failure += 1;
-                    testResults.failedTests.push(testFunction);
-                    testResults.failedMsgs.push(e.message);
-                } else {
-                    testResults.error += 1;
+            var testRunner = {
+                test : function(){
+                    for(i=0;i < testFunctions.length; i+=1){
+                        attemptTest(testFunctions[i]);
+                    }
+                    printResults();
+                }
+            };
+
+
+            var attemptTest = function(testFunction){
+                testResults.ran += 1;
+                try {
+                    testFunction();
+                    testResults.success += 1;
+                } catch (e) {
+                    if (e.name.indexOf("assert") > -1){
+                        testResults.failure += 1;
+                        testResults.failedTests.push(testFunction);
+                        testResults.failedMsgs.push(e.message);
+                    } else {
+                        testResults.error += 1;
+                    }
                 }
             }
-        }
 
-        var printResults = function(){
-            print("\n----------------------------------------------------");
-            print("\ntests:   " + testResults.ran );
-            print("\nsuccess: " + testResults.success );
-            print("\nfailure: " + testResults.failure );
-            print("\nerror:   " + testResults.error );
+            var printResults = function(){
+                CORE.out("\n----------------------------------------------------");
+                CORE.out("\ntests:   " + testResults.ran );
+                CORE.out("\nsuccess: " + testResults.success );
+                CORE.out("\nfailure: " + testResults.failure );
+                CORE.out("\nerror:   " + testResults.error );
 
-            for(i=0;i < testResults.failure; i+=1){
-                print("\n----------------------------------------------------");
-                print("" + testResults.failedTests[i] );
-                print("message: " + testResults.failedMsgs[i] );
-            }            
+                for(i=0;i < testResults.failure; i+=1){
+                    CORE.out("\n----------------------------------------------------");
+                    CORE.out("" + testResults.failedTests[i] );
+                    CORE.out("message: " + testResults.failedMsgs[i] );
+                }
 
-            print("\n----------------------------------------------------\n\n");
-        }
+                CORE.out("\n----------------------------------------------------\n\n");
+            }
 
+            return testRunner;
+        },
 
-        return testRunner;
-        
-    },
-
-
-    assertEquals : function(oneArg, otherArg){
-        if (oneArg !== otherArg){
-            throw {
-                name : "assertEquals",
-                message : "arg " + oneArg + " !== " + otherArg
+        assertEquals : function(oneArg, otherArg) {
+            if (oneArg !== otherArg) {
+                throw {
+                    name : "assertEquals",
+                    message : "arg " + oneArg + " !== " + otherArg
+                }
             }
         }
     }
 
-}
+    return tester;
+
+}(CORE);

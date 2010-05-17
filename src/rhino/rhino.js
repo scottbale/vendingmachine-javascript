@@ -3,15 +3,16 @@ load('src/core/core.js');
 
 (function(CORE){
 
-//    var dotToSlash = function(toImport){
-//        toImport.replace(/\./g, '/');
-//    }
+    var dotToSlash = function(toImport){
+        // replace JDK String with JS String
+        return new String(toImport).replace(/\./g, '/');
+    };
 
     CORE.require = function(toImport){
         try {
-            load('src/'+toImport+'.js');
+            load('src/'+dotToSlash(toImport)+'.js');
         } catch (e){
-            load('testsrc/'+toImport+'.js');
+            load('testsrc/'+dotToSlash(toImport)+'.js');
         }
     };
     CORE.out = function(output){
@@ -24,13 +25,7 @@ load('src/core/core.js');
 CORE.out('\nrhino engine detected ' + arguments.length + ' args');
 
 for (i in arguments) {
-    CORE.out('\narg['+i+'] ' + arguments[i]);
-}
-CORE.out('\n\n');
-
-
-for (i in arguments) {
-    CORE.out('\nrhino attempting to load arg['+i+'] ' + arguments[i] + '\n');
+    CORE.out('\nrhino attempting to load arg['+i+'] ' + arguments[i] );
     CORE.require(arguments[i]);
 }
 CORE.out('\n\n');

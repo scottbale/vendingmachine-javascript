@@ -62,9 +62,9 @@ var TESTER = function(CORE){
         };
 
         return testRunner;
-    }
+    };
 
-    var tester = {
+    return {
 
         TestRunner : function(test){
             return makeTestRunner(test);
@@ -78,8 +78,6 @@ var TESTER = function(CORE){
                 }
             }
         }
-    }
-
-    return tester;
+    };
 
 }(CORE);

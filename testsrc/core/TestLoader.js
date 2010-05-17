@@ -2,9 +2,9 @@ CORE.require('core/Tester');
 
 var TEST_LOADER = function(TESTER){
 
-    var tests = {}
+    var tests = {};
 
-    var loader = {
+    return {
         runTests : function(){
             TESTER.TestRunner(tests).test();
             return this;
@@ -16,8 +16,6 @@ var TEST_LOADER = function(TESTER){
             return this;
         }
     };
-
-    return loader;
 
 }(TESTER);
 

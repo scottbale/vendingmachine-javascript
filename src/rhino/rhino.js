@@ -13,10 +13,10 @@ load('src/core/core.js');
         } catch (e){
             load('testsrc/'+toImport+'.js');
         }
-    }
+    };
     CORE.out = function(output){
         print(output);
-    }
+    };
 
     return CORE;
 })(CORE);

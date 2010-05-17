@@ -2,7 +2,6 @@ var TESTER = function(CORE){
 
     var makeTestRunner = function(test){
 
-        var testFunctions = [];
         var testResults = {
             ran : 0,
             success : 0,
@@ -10,35 +9,27 @@ var TESTER = function(CORE){
             error : 0,
             failedTests : [],
             failedMsgs : []
-        }
+        };
 
-
-        var loadFunctions = function(test){
-            for (prop in test){
-                if (typeof test[prop] == 'function'){
-                    if (prop.indexOf("test")>-1){
-                        testFunctions.push(test[prop]);
-                    }
-                } else if (typeof test[prop] == 'object'){
-                    loadFunctions(test[prop]);
+        var runTestsRecursive = function(prefix, aTest){
+            for (prop in aTest){
+                if (typeof aTest[prop] == 'function' && prop.indexOf("test")>-1){
+                    attemptTest(prefix+prop, aTest[prop]);
+                } else if (typeof aTest[prop] == 'object'){
+                    runTestsRecursive(prop+".", aTest[prop]);
                 }
             }
         };
 
-        loadFunctions(test);
-
-
         var testRunner = {
             test : function(){
-                for(i=0;i < testFunctions.length; i+=1){
-                    attemptTest(testFunctions[i]);
-                }
+                runTestsRecursive("",test);
                 printResults();
             }
         };
 
 
-        var attemptTest = function(testFunction){
+        var attemptTest = function(testName, testFunction){
             testResults.ran += 1;
             try {
                 testFunction();
@@ -46,13 +37,13 @@ var TESTER = function(CORE){
             } catch (e) {
                 if (e.name.indexOf("assert") > -1){
                     testResults.failure += 1;
-                    testResults.failedTests.push(testFunction);
+                    testResults.failedTests.push(testName);
                     testResults.failedMsgs.push(e.message);
                 } else {
                     testResults.error += 1;
                 }
             }
-        }
+        };
 
         var printResults = function(){
             CORE.out("\n----------------------------------------------------");
@@ -63,12 +54,12 @@ var TESTER = function(CORE){
 
             for(i=0;i < testResults.failure; i+=1){
                 CORE.out("\n----------------------------------------------------");
-                CORE.out("" + testResults.failedTests[i] );
+                CORE.out("\n" + testResults.failedTests[i] );
                 CORE.out("message: " + testResults.failedMsgs[i] );
             }
 
             CORE.out("\n----------------------------------------------------\n\n");
-        }
+        };
 
         return testRunner;
     }

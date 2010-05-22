@@ -2,14 +2,18 @@ var ACM = function(CURRENCY){
 
     var _makeAutomatedCashier = function(){
 
-        
+        var coinReturn = [];
 
         var cashier = {
             returnCoins : function(){
-                return [];
+                var coinsToReturn = coinReturn;
+                coinReturn = [];
+                return coinsToReturn;
+            },
+            deposit : function(coin){
+                coinReturn.push(coin);
             }
         };
-
 
         return cashier;
     };

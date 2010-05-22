@@ -14,7 +14,7 @@ CORE.require('vendingmachine/AutomatedCashier');
                 acm.deposit(CURRENCY.NICKEL);
                 var coinsReturned = acm.returnCoins();
                 TESTER.assertEquals(1, coinsReturned.length);
-                TESTER.assertEquals(CURRENCY.NICKEL, coinsReturned[1]);
+                TESTER.assertEquals(CURRENCY.NICKEL, coinsReturned[0]);
             }
         }
     });

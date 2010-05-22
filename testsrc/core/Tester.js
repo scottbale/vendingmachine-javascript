@@ -86,11 +86,11 @@ var TESTER = function(CORE){
             return makeTestRunner(test);
         },
 
-        assertEquals : function(oneArg, otherArg) {
-            if (oneArg !== otherArg) {
+        assertEquals : function(expected, actual) {
+            if (expected !== actual) {
                 throw {
                     name : "assertEquals",
-                    message : "arg " + oneArg + " !== " + otherArg
+                    message : "expected " + expected + " !== actual " + actual
                 }
             }
         },

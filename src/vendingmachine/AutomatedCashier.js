@@ -4,8 +4,11 @@ var ACM = function(CURRENCY){
 
         
 
-        var cashier = {};
-
+        var cashier = {
+            returnCoins : function(){
+                return [];
+            }
+        };
 
 
         return cashier;

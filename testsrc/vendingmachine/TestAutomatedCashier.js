@@ -5,12 +5,16 @@ CORE.require('vendingmachine/AutomatedCashier');
 
     testLoader.addTests({
         TestAutomatedCashier : {
-            testBogusFail : function(){
-              TESTER.assertEquals(4, CURRENCY.NICKEL);
-            },
             testCoinReturnIsEmpty : function(){
                 var acm = ACM.makeAutomatedCashier();
-                TESTER.assertEquals(acm.returnCoins().length(), 0);
+                TESTER.assertEquals(0, acm.returnCoins().length);
+            },
+            testDepositOneCoinThenReturn : function(){
+                var acm = ACM.makeAutomatedCashier();
+                acm.deposit(CURRENCY.NICKEL);
+                var coinsReturned = acm.returnCoins();
+                TESTER.assertEquals(1, coinsReturned.length);
+                TESTER.assertEquals(CURRENCY.NICKEL, coinsReturned[1]);
             }
         }
     });

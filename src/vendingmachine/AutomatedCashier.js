@@ -3,8 +3,9 @@ var ACM = function(CURRENCY){
     var _makeAutomatedCashier = function(){
 
         var coinReturn = [];
+        var coins = [];
 
-        var cashier = {
+        return {
             returnCoins : function(){
                 var coinsToReturn = coinReturn;
                 coinReturn = [];
@@ -12,22 +13,20 @@ var ACM = function(CURRENCY){
             },
             deposit : function(coin){
                 coinReturn.push(coin);
+            },
+            maintenanceLoad : function(coin){
+                coins.push(coin);
+            },
+            maintenanceGet : function(){
+                return coins;
             }
         };
-
-        return cashier;
     };
 
-
-
-
-    var module = {
+    return {
         makeAutomatedCashier : function(){
             return _makeAutomatedCashier();
         }
     };
-
-
-    return module;
 
 }(CURRENCY);

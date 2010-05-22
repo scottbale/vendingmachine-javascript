@@ -1,6 +1,8 @@
 var ACM = function(CURRENCY){
 
-    var MakeAutomatedCashier = function(){
+    var _makeAutomatedCashier = function(){
+
+        
 
         var cashier = {};
 
@@ -12,9 +14,13 @@ var ACM = function(CURRENCY){
 
 
 
-    var acm = {};
+    var module = {
+        makeAutomatedCashier : function(){
+            return _makeAutomatedCashier();
+        }
+    };
 
 
-    return acm;
+    return module;
 
 }(CURRENCY);

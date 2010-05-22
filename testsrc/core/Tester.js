@@ -8,7 +8,9 @@ var TESTER = function(CORE){
             failure : 0,
             error : 0,
             failedTests : [],
-            failedMsgs : []
+            failedMsgs : [],
+            errorTests : [],
+            errors : []
         };
 
         var runTestsRecursive = function(prefix, aTest){
@@ -41,6 +43,8 @@ var TESTER = function(CORE){
                     testResults.failedMsgs.push(e.message);
                 } else {
                     testResults.error += 1;
+                    testResults.errorTests.push(testName);
+                    testResults.errors.push(e);
                 }
             }
         };
@@ -53,11 +57,23 @@ var TESTER = function(CORE){
             CORE.out("\nerror:   " + testResults.error );
 
             for(i=0;i < testResults.failure; i+=1){
+                if (i===0){
+                    CORE.out("\n----------------------------------------------------");
+                    CORE.out("\nFAILED");
+                }
                 CORE.out("\n----------------------------------------------------");
                 CORE.out("\n" + testResults.failedTests[i] );
-                CORE.out("message: " + testResults.failedMsgs[i] );
+                CORE.out(" message: " + testResults.failedMsgs[i] );
             }
-
+            for(i=0;i < testResults.error; i+=1){
+                if (i===0){
+                    CORE.out("\n----------------------------------------------------");
+                    CORE.out("\nERROR");
+                }
+                CORE.out("\n----------------------------------------------------");
+                CORE.out("\n" + testResults.errorTests[i] );
+                CORE.out(" error: " + testResults.errors[i] );
+            }
             CORE.out("\n----------------------------------------------------\n\n");
         };
 
@@ -75,6 +91,15 @@ var TESTER = function(CORE){
                 throw {
                     name : "assertEquals",
                     message : "arg " + oneArg + " !== " + otherArg
+                }
+            }
+        },
+
+        assertTrue : function(booleanExpression){
+            if (!booleanExpression){
+                throw {
+                    name : "assertTrue",
+                    message : "boolean expression " + booleanExpression + " is false"
                 }
             }
         }

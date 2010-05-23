@@ -21,10 +21,9 @@ var CORE = function(){
         });
 
         Array.method('reduce', function(f, value){
-            for (var i=0; i<this.length; i++){
-                value = f(this[i], value);
-            }
-
+            this.each(function(item){
+                value = f(item, value);
+            });
             return value;
         });
     };

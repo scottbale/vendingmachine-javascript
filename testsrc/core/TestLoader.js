@@ -10,14 +10,13 @@ var TEST_LOADER = function(TESTER){
             return this;
         },
         addTests : function(moreTests){
-            for (testName in moreTests) {
-                tests[testName] = moreTests[testName];
+            for (var testName in moreTests) {
+                if (moreTests.hasOwnProperty(testName)){
+                    tests[testName] = moreTests[testName];
+                }
             }
             return this;
         }
     };
 
 }(TESTER);
-
-
-

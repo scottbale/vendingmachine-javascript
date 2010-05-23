@@ -1,6 +1,6 @@
 var ACM = function(CURRENCY){
 
-    var _makeAutomatedCashier = function(){
+    var privateMakeAutomatedCashier = function(){
 
         var coinReturn = [];
         var coins = [];
@@ -77,7 +77,7 @@ var ACM = function(CURRENCY){
 
     return {
         makeAutomatedCashier : function(){
-            return _makeAutomatedCashier();
+            return privateMakeAutomatedCashier();
         }
     };
 

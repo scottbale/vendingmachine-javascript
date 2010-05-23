@@ -17,11 +17,3 @@ CORE.require('vendingmachine.Currency');
     });
 
 }(TEST_LOADER));
-
-
-
-
-
-
-
-

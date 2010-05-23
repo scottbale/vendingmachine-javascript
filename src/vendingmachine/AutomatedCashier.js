@@ -5,6 +5,29 @@ var ACM = function(CURRENCY){
         var coinReturn = [];
         var coins = [];
 
+        var doPurchase = function(purchasePrice){
+            if (ifSufficientFunds(purchasePrice)){
+                transferFunds();
+                return true;
+            }
+            return false;
+        };
+
+        var ifSufficientFunds = function(purchasePrice){
+            var funds = 0;
+            // TODO each()
+            for (var i=0; i<coinReturn.length; i++){
+                funds+=coinReturn[i];
+            }
+            return (funds >= purchasePrice);
+        };
+
+        var transferFunds = function(){
+            coins = coinReturn;
+            coinReturn = [];
+        };
+
+
         return {
             returnCoins : function(){
                 var coinsToReturn = coinReturn;
@@ -19,6 +42,9 @@ var ACM = function(CURRENCY){
             },
             maintenanceGet : function(){
                 return coins;
+            },
+            purchase : function(purchasePriceInCents){
+                return doPurchase(purchasePriceInCents);
             }
         };
     };

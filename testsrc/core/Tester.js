@@ -80,7 +80,7 @@ var TESTER = function(CORE){
         return testRunner;
     };
 
-    return {
+    var tester = {
 
         TestRunner : function(test){
             return makeTestRunner(test);
@@ -102,7 +102,15 @@ var TESTER = function(CORE){
                     message : "boolean expression " + booleanExpression + " is false"
                 }
             }
+        },
+
+        assertArrayEquals : function(expected, actual){
+            tester.assertEquals(expected.length, actual.length);
+            for(var i=0; i<expected.length; i++){
+                tester.assertEquals(expected[i], actual[i]);
+            }
         }
     };
+    return tester;
 
 }(CORE);

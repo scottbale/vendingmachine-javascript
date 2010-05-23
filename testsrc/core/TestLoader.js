@@ -1,4 +1,4 @@
-CORE.require('core/Tester');
+CORE.require('core.Tester');
 
 var TEST_LOADER = function(TESTER){
 

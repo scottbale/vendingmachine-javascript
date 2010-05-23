@@ -1,4 +1,4 @@
-CORE.require('vendingmachine/Currency');
+CORE.require('vendingmachine.Currency');
 
 (function(testLoader){
 

@@ -1,5 +1,5 @@
-CORE.require('vendingmachine/Currency');
-CORE.require('vendingmachine/AutomatedCashier');
+CORE.require('vendingmachine.Currency');
+CORE.require('vendingmachine.AutomatedCashier');
 
 (function(testLoader, TESTER, ACM, CURRENCY){
 

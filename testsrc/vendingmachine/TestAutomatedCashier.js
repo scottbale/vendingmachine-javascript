@@ -48,7 +48,27 @@ CORE.require('vendingmachine.AutomatedCashier');
                 acm.deposit(CURRENCY.QUARTER);
                 TESTER.assertTrue(acm.purchase(60));
                 TESTER.assertArrayEquals([], acm.returnCoins());
-                TESTER.assertArrayEquals([CURRENCY.NICKEL, CURRENCY.QUARTER, CURRENCY.DIME, CURRENCY.QUARTER], acm.maintenanceGet());
+                TESTER.assertArrayEquals([CURRENCY.QUARTER, CURRENCY.QUARTER, CURRENCY.DIME, CURRENCY.NICKEL], acm.maintenanceGet());
+            },
+            testPurchaseChangeNeededButNotAvailable : function(){
+                var acm = ACM.makeAutomatedCashier();
+                acm.deposit(CURRENCY.QUARTER);
+                acm.deposit(CURRENCY.QUARTER);
+                acm.deposit(CURRENCY.QUARTER);
+                TESTER.assertTrue(acm.purchase(60));
+                TESTER.assertArrayEquals([], acm.returnCoins());
+            },
+            testPurchaseChangeNeeded : function(){
+                var acm = ACM.makeAutomatedCashier();
+                acm.maintenanceLoad(CURRENCY.DIME);
+                acm.maintenanceLoad(CURRENCY.NICKEL);
+                acm.maintenanceLoad(CURRENCY.QUARTER);
+                acm.deposit(CURRENCY.QUARTER);
+                acm.deposit(CURRENCY.QUARTER);
+                acm.deposit(CURRENCY.QUARTER);
+                TESTER.assertTrue(acm.purchase(60));
+                TESTER.assertArrayEquals([CURRENCY.DIME, CURRENCY.NICKEL], acm.returnCoins());
+                TESTER.assertArrayEquals([CURRENCY.QUARTER, CURRENCY.QUARTER, CURRENCY.QUARTER, CURRENCY.QUARTER], acm.maintenanceGet());
             }
         }
     });

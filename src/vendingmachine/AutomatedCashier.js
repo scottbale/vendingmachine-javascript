@@ -7,7 +7,9 @@ var ACM = function(CURRENCY){
 
         var doPurchase = function(purchasePrice){
             if (ifSufficientFunds(purchasePrice)){
+                var changeDue = getChangeDue(purchasePrice);
                 transferFunds();
+                makeChange(changeDue);
                 return true;
             }
             return false;
@@ -22,9 +24,36 @@ var ACM = function(CURRENCY){
             return (funds >= purchasePrice);
         };
 
+        var getChangeDue = function(purchasePrice){
+            // TODO reduce()
+            var totalDeposited = 0;
+            for (var i=0; i<coinReturn.length; i++){
+                totalDeposited+=coinReturn[i];
+            }
+            return totalDeposited - purchasePrice;
+        };
+
         var transferFunds = function(){
             coins = coins.concat(coinReturn);
             coinReturn = [];
+        };
+
+        var makeChange = function(changeDue){
+            coins.sort(function(a,b){
+                return b-a;
+            });
+
+            var buffer = coins.concat();
+            coins = [];
+            //TODO each()
+            for (var i=0; i<buffer.length; i++){
+                if (changeDue > 0 && buffer[i] <= changeDue){
+                    changeDue -= buffer[i];
+                    coinReturn.push(buffer[i]);
+                } else {
+                    coins.push(buffer[i]);
+                }
+            }
         };
 
 

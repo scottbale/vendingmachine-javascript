@@ -105,10 +105,18 @@ var TESTER = function(CORE){
         },
 
         assertArrayEquals : function(expected, actual){
-            tester.assertEquals(expected.length, actual.length);
-            for(var i=0; i<expected.length; i++){
-                tester.assertEquals(expected[i], actual[i]);
+            try {
+                tester.assertEquals(expected.length, actual.length);
+                for(var i=0; i<expected.length; i++){
+                    tester.assertEquals(expected[i], actual[i]);
+                }
+            } catch (e) {
+                throw {
+                    name : "assertArrayEquals",
+                    message : "expected array " + expected + " !== actual " + actual + "\nnested exception: " + e.message
+                }
             }
+
         }
     };
     return tester;

@@ -42,11 +42,13 @@ CORE.require('vendingmachine.AutomatedCashier');
             },
             testPurchaseExactChange : function(){
                 var acm = ACM.makeAutomatedCashier();
+                acm.maintenanceLoad(CURRENCY.NICKEL);
                 acm.deposit(CURRENCY.QUARTER);
                 acm.deposit(CURRENCY.DIME);
                 acm.deposit(CURRENCY.QUARTER);
                 TESTER.assertTrue(acm.purchase(60));
                 TESTER.assertArrayEquals([], acm.returnCoins());
+                TESTER.assertArrayEquals([CURRENCY.NICKEL, CURRENCY.QUARTER, CURRENCY.DIME, CURRENCY.QUARTER], acm.maintenanceGet());
             }
         }
     });

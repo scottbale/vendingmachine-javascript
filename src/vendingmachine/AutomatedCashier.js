@@ -23,7 +23,7 @@ var ACM = function(CURRENCY){
         };
 
         var transferFunds = function(){
-            coins = coinReturn;
+            coins = coins.concat(coinReturn);
             coinReturn = [];
         };
 

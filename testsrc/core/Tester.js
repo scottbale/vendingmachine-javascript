@@ -14,10 +14,10 @@ var TESTER = function(CORE){
         };
 
         var runTestsRecursive = function(prefix, aTest){
-            for (prop in aTest){
-                if (typeof aTest[prop] == 'function' && prop.indexOf("test")>-1){
+            for (var prop in aTest){
+                if (typeof aTest[prop] === 'function' && prop.indexOf("test")>-1){
                     attemptTest(prefix+prop, aTest[prop]);
-                } else if (typeof aTest[prop] == 'object'){
+                } else if (typeof aTest[prop] === 'object'){
                     runTestsRecursive(prop+".", aTest[prop]);
                 }
             }
@@ -56,6 +56,7 @@ var TESTER = function(CORE){
             CORE.out("\nfailure: " + testResults.failure );
             CORE.out("\nerror:   " + testResults.error );
 
+            var i=0;
             for(i=0;i < testResults.failure; i+=1){
                 if (i===0){
                     CORE.out("\n----------------------------------------------------");
@@ -91,7 +92,7 @@ var TESTER = function(CORE){
                 throw {
                     name : "assertEquals",
                     message : "expected " + expected + " !== actual " + actual
-                }
+                };
             }
         },
 
@@ -100,21 +101,21 @@ var TESTER = function(CORE){
                 throw {
                     name : "assertTrue",
                     message : "boolean expression " + booleanExpression + " is false"
-                }
+                };
             }
         },
 
         assertArrayEquals : function(expected, actual){
             try {
                 tester.assertEquals(expected.length, actual.length);
-                for(var i=0; i<expected.length; i++){
+                for(var i=0; i<expected.length; i+=1){
                     tester.assertEquals(expected[i], actual[i]);
                 }
             } catch (e) {
                 throw {
                     name : "assertArrayEquals",
                     message : "expected array " + expected + " !== actual " + actual + "\nnested exception: " + e.message
-                }
+                };
             }
 
         }

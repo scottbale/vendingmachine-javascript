@@ -25,7 +25,9 @@ load('src/core/core.js');
 CORE.out('\nrhino engine detected ' + arguments.length + ' args');
 
 for (i in arguments) {
-    CORE.out('\nrhino attempting to load arg['+i+'] ' + arguments[i] );
-    CORE.require(arguments[i]);
+    if (arguments.hasOwnProperty(i)){
+        CORE.out('\nrhino attempting to load arg['+i+'] ' + arguments[i] );
+        CORE.require(arguments[i]);
+    }
 }
 CORE.out('\n\n');

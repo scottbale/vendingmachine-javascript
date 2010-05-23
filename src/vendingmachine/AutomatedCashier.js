@@ -17,19 +17,16 @@ var ACM = function(CURRENCY){
 
         var ifSufficientFunds = function(purchasePrice){
             var funds = 0;
-            // TODO each()
-            for (var i=0; i<coinReturn.length; i++){
-                funds+=coinReturn[i];
-            }
+            coinReturn.each(function(coin){
+                funds+=coin;
+            });
             return (funds >= purchasePrice);
         };
 
         var getChangeDue = function(purchasePrice){
-            // TODO reduce()
-            var totalDeposited = 0;
-            for (var i=0; i<coinReturn.length; i++){
-                totalDeposited+=coinReturn[i];
-            }
+            var totalDeposited = coinReturn.reduce(function(coin, runningTotal){
+                return coin + runningTotal;
+            }, 0);
             return totalDeposited - purchasePrice;
         };
 
@@ -45,15 +42,15 @@ var ACM = function(CURRENCY){
 
             var buffer = coins.concat();
             coins = [];
-            //TODO each()
-            for (var i=0; i<buffer.length; i++){
-                if (changeDue > 0 && buffer[i] <= changeDue){
-                    changeDue -= buffer[i];
-                    coinReturn.push(buffer[i]);
+
+            buffer.each(function(coin){
+                if (changeDue > 0 && coin <= changeDue){
+                    changeDue -= coin;
+                    coinReturn.push(coin);
                 } else {
-                    coins.push(buffer[i]);
+                    coins.push(coin);
                 }
-            }
+            });
         };
 
 

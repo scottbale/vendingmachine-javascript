@@ -105,6 +105,15 @@ var TESTER = function(CORE){
             }
         },
 
+        assertFalse : function(booleanExpression){
+            if (booleanExpression){
+                throw {
+                    name : "assertFalse",
+                    message : "boolean expression " + booleanExpression + " is true"
+                };
+            }
+        },
+
         assertArrayEquals : function(expected, actual){
             try {
                 tester.assertEquals(expected.length, actual.length);

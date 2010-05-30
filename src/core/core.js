@@ -26,6 +26,16 @@ var CORE = function(){
             });
             return value;
         });
+        Array.method('contains', function(test){
+            var contains = false;
+            this.each(function(item){
+                if (item === test){
+                    contains = true;
+                    return false;
+                }
+            });
+            return contains;
+        });
     };
 
     modifyLanguage();

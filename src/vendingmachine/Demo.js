@@ -1,3 +1,3 @@
-CORE.require('vendingmachine.Currency');
+CORE.require('vendingmachine.Coins');
 
-print("currency NICKEL: " + CURRENCY.NICKEL);
+print("coins NICKEL: " + COINS.NICKEL);

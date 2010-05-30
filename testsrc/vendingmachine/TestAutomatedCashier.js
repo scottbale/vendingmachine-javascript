@@ -1,4 +1,4 @@
-CORE.require('vendingmachine.Currency');
+CORE.require('vendingmachine.Coins');
 CORE.require('vendingmachine.AutomatedCashier');
 
 (function(testLoader, TESTER, ACM, CURRENCY){
@@ -74,7 +74,7 @@ CORE.require('vendingmachine.AutomatedCashier');
     });
 
 
-}(TEST_LOADER, TESTER, ACM, CURRENCY));
+}(TEST_LOADER, TESTER, ACM, COINS));
 
 
 

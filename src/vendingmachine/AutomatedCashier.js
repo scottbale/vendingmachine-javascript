@@ -81,4 +81,4 @@ var ACM = function(CURRENCY){
         }
     };
 
-}(CURRENCY);
+}(COINS);

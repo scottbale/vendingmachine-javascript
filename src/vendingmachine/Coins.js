@@ -3,6 +3,6 @@ var COINS = {
     DIME : 10,
     QUARTER : 25,
     isCoin : function(cents){
-        return [COINS.NICKEL, COINS.DIME, COINS.QUARTER].contains(cents);
+        return [this.NICKEL, this.DIME, this.QUARTER].contains(cents);
     }
 };

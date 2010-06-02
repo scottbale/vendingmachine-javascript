@@ -81,7 +81,7 @@ var TESTER = function(CORE){
         return testRunner;
     };
 
-    var tester = {
+    return {
 
         TestRunner : function(test){
             return makeTestRunner(test);
@@ -116,9 +116,9 @@ var TESTER = function(CORE){
 
         assertArrayEquals : function(expected, actual){
             try {
-                tester.assertEquals(expected.length, actual.length);
+                this.assertEquals(expected.length, actual.length);
                 for(var i=0; i<expected.length; i+=1){
-                    tester.assertEquals(expected[i], actual[i]);
+                    this.assertEquals(expected[i], actual[i]);
                 }
             } catch (e) {
                 throw {
@@ -129,6 +129,5 @@ var TESTER = function(CORE){
 
         }
     };
-    return tester;
 
 }(CORE);

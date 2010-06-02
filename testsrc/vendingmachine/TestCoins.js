@@ -1,6 +1,6 @@
 CORE.require('vendingmachine.Coins');
 
-(function(testLoader){
+(function(testLoader, TESTER, COINS){
 
     testLoader.addTests({
         TestCoins : {
@@ -20,4 +20,4 @@ CORE.require('vendingmachine.Coins');
         }
     });
 
-}(TEST_LOADER));
+}(TEST_LOADER, TESTER, COINS));

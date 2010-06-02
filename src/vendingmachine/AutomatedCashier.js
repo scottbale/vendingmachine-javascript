@@ -1,4 +1,4 @@
-var ACM = function(CURRENCY){
+var ACM = function(){
 
     var privateMakeAutomatedCashier = function(){
 
@@ -81,4 +81,4 @@ var ACM = function(CURRENCY){
         }
     };
 
-}(COINS);
+}();

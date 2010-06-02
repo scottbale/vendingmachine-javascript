@@ -1,8 +1,6 @@
 // CORE module, abstracts environment-specifics
 var CORE = function(){
 
-    var namespaces = {};
-
     /*
      * blatantly ripped off from Douglas Crockford
      */
@@ -40,20 +38,14 @@ var CORE = function(){
 
     modifyLanguage();
 
-    var core = {
+    return {
 
         out : function(output){
             //implemented by env
         },
 
         require : function(toImport){
-            core.out("'require' not implemented!");
-        },
-
-        namespace : function(namespace){
-
+            this.out("'require' not implemented!");
         }
     };
-
-    return core;
 }();

@@ -1,3 +1,4 @@
 CORE.require('vendingmachine.Coins');
 
-print("coins NICKEL: " + COINS.NICKEL);
+CORE.out("coins NICKEL: " + COINS.NICKEL);
+CORE.debug(COINS);

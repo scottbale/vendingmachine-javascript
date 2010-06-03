@@ -50,32 +50,30 @@ var TESTER = function(CORE){
         };
 
         var printResults = function(){
-            CORE.out("\n----------------------------------------------------");
-            CORE.out("\ntests:   " + testResults.ran );
-            CORE.out("\nsuccess: " + testResults.success );
-            CORE.out("\nfailure: " + testResults.failure );
-            CORE.out("\nerror:   " + testResults.error );
+            CORE.out("----------------------------------------------------");
+            CORE.out("tests:   " + testResults.ran );
+            CORE.out("success: " + testResults.success );
+            CORE.out("failure: " + testResults.failure );
+            CORE.out("error:   " + testResults.error );
 
             var i=0;
             for(i=0;i < testResults.failure; i+=1){
                 if (i===0){
-                    CORE.out("\n----------------------------------------------------");
-                    CORE.out("\nFAILED");
+                    CORE.out("----------------------------------------------------");
+                    CORE.out("FAILED");
                 }
-                CORE.out("\n----------------------------------------------------");
-                CORE.out("\n" + testResults.failedTests[i] );
-                CORE.out(" message: " + testResults.failedMsgs[i] );
+                CORE.out("----------------------------------------------------");
+                CORE.out("" + testResults.failedTests[i] + " message: " + testResults.failedMsgs[i]);
             }
             for(i=0;i < testResults.error; i+=1){
                 if (i===0){
-                    CORE.out("\n----------------------------------------------------");
-                    CORE.out("\nERROR");
+                    CORE.out("----------------------------------------------------");
+                    CORE.out("ERROR");
                 }
-                CORE.out("\n----------------------------------------------------");
-                CORE.out("\n" + testResults.errorTests[i] );
-                CORE.out(" error: " + testResults.errors[i] );
+                CORE.out("----------------------------------------------------");
+                CORE.out("" + testResults.errorTests[i] + " error: " + testResults.errors[i]);
             }
-            CORE.out("\n----------------------------------------------------\n\n");
+            CORE.out("----------------------------------------------------\n\n");
         };
 
         return testRunner;

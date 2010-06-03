@@ -16,18 +16,18 @@ load('src/core/core.js');
         }
     };
     CORE.out = function(output){
-        print(output);
+        print('\n'+output);
     };
 
     return CORE;
 }(CORE));
 
-CORE.out('\nrhino engine detected ' + arguments.length + ' args');
+CORE.out('rhino engine detected ' + arguments.length + ' args');
 
 for (var i in arguments) {
     if (arguments.hasOwnProperty(i)){
-        CORE.out('\nrhino attempting to load arg['+i+'] ' + arguments[i] );
+        CORE.out('rhino attempting to load arg['+i+'] ' + arguments[i] );
         CORE.require(arguments[i]);
     }
 }
-CORE.out('\n\n');
+CORE.out('\n');
